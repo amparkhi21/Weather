@@ -32,6 +32,9 @@ async function weather(c){
         if(name){
             name.textContent=data.name;
         }
+        document.getElementById("chead").textContent=`${city.value}`;
+        document.getElementById("temp").textContent= `${data.main.temp} °C`;
+        document.getElementById("con").textContent=`${data.weather[0].main}`;
         document.getElementById("temperature").textContent = `${data.main.temp} °C`;
         document.getElementById("humidity").textContent = `${data.main.humidity} %`;
         document.getElementById("wind").textContent = `${data.wind.speed} km/h`;
@@ -40,4 +43,4 @@ async function weather(c){
     catch(error){
         console.error("Error found:",error);
     }
-}  
+} 
