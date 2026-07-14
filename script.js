@@ -8,6 +8,7 @@ btn.addEventListener("click",function(){
         return;
     }
     weather(c);
+    weeklyForecast(c);
 })
 city.addEventListener("keydown",function(e){
     if(e.key==="Enter"){
@@ -44,3 +45,51 @@ async function weather(c){
         console.error("Error found:",error);
     }
 } 
+async function weeklyForecast(c) {
+    try {
+        const url = `https://api.openweathermap.org/data/2.5/forecast?q=${c}&appid=${api}&units=metric`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.cod != "200") {
+            document.getElementById("weekly-forecast").innerHTML = "City Not Found";
+            return;
+        }
+
+        const daily = {};
+        data.list.forEach(item => {
+            const dateObj = new Date(item.dt * 1000);
+            const dayLabel = dateObj.toLocaleDateString("en-US", { weekday: "long" });
+            const dateKey = dateObj.toLocaleDateString("en-US");
+
+            if (!daily[dateKey]) {
+                daily[dateKey] = {
+                    day: dayLabel,
+                    min: item.main.temp,
+                    max: item.main.temp,
+                    weather: item.weather[0].main
+                };
+            } else {
+                daily[dateKey].min = Math.min(daily[dateKey].min, item.main.temp);
+                daily[dateKey].max = Math.max(daily[dateKey].max, item.main.temp);
+            }
+        });
+
+        const container = document.getElementById("weekly-forecast");
+        container.innerHTML = "";
+        Object.values(daily).forEach(({ day, min, max, weather }) => {
+            container.innerHTML += `
+                <div class="forecast-day">
+                    <div class="day">
+                        <span class="day">${day}</span>
+                        <span class="temp">${Math.round(max)}° / ${Math.round(min)}°</span>
+                    </div>
+                    <span class="weather">${weather}</span>
+                    
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error("Error found:", error);
+    }
+}
