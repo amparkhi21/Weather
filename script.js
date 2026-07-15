@@ -34,7 +34,6 @@ async function weather(c){
             name.textContent=d.name;
         }
         document.getElementById("temp").textContent= `${d.main.temp} °C`;
-        document.getElementById("con").textContent=`${d.weather[0].main}`;
         document.getElementById("chead").textContent=`${city.value}`;
         document.getElementById("temperature").textContent = `${d.main.temp} °C`;
         document.getElementById("humidity").textContent = `${d.main.humidity} %`;
