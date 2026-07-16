@@ -39,6 +39,18 @@ async function weather(c){
         document.getElementById("humidity").textContent = `${d.main.humidity} %`;
         document.getElementById("wind").textContent = `${d.wind.speed} km/h`;
         document.getElementById("condition").textContent = `${d.weather[0].main}`;
+
+        const sunrise = new Date(d.sys.sunrise * 1000).toLocaleTimeString("en-US", {hour: "2-digit", minute:"2-digit"});
+        const sunset = new Date(d.sys.sunset * 1000).toLocaleTimeString("en-US", {hour: "2-digit", minute:"2-digit"});
+        const pressure = d.main.pressure + " hPa";
+        const visibility = (d.visibility/1000).toFixed(1) + " km";
+
+        document.getElementById("sunrise").textContent=`${sunrise}`;
+        document.getElementById("sunset").textContent=`${sunset}`;
+        document.getElementById("visibility").textContent=`${visibility}`;
+        document.getElementById("hum").textContent=`${d.main.humidity}%`;
+        document.getElementById("w").textContent= `${d.wind.speed} km/h`;
+        document.getElementById("pressure").textContent=`${pressure}`;
     }
     catch(error){
         console.error("Error found:",error);
@@ -49,12 +61,10 @@ async function weeklyForecast(c) {
         const url = `https://api.openweathermap.org/data/2.5/forecast?q=${c}&appid=${api}&units=metric`;
         const response = await fetch(url);
         const data = await response.json();
-
         if (data.cod != "200") {
             document.getElementById("weekly-forecast").innerHTML = "City Not Found";
             return;
         }
-
         const daily = {};
         data.list.forEach(item => {
             const dateObj = new Date(item.dt * 1000);
@@ -73,20 +83,17 @@ async function weeklyForecast(c) {
                 daily[dateKey].max = Math.max(daily[dateKey].max, item.main.temp);
             }
         });
-
         const container = document.getElementById("weekly-forecast");
         container.innerHTML = "";
         Object.values(daily).forEach(({ day, min, max, weather }) => {
-            container.innerHTML += `
-                <div class="forecast-day">
-                    <div class="day">
-                        <span class="day">${day}</span>
-                        <span class="temp">${Math.round(max)}° / ${Math.round(min)}°</span>
-                    </div>
-                    <span class="weather">${weather}</span>
-                    
+            container.innerHTML += 
+            `<div class="forecast-day">
+                <div class="day">
+                    <span class="day">${day}</span>
+                    <span class="temp">${Math.round(max)}° / ${Math.round(min)}°</span>
                 </div>
-            `;
+                <span class="weather">${weather}</span>    
+            </div>`;
         });
     } catch (error) {
         console.error("Error found:", error);

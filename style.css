@@ -8,14 +8,15 @@ body{
   background-color: #100126;
   display: flex;
   gap: 50px;
+  margin:32px 30px;
 }
 #h{
   display: flex;
   justify-content: center;
   padding: 20px;
   margin: 30px;
-  background: linear-gradient(to right, #100126, #3c246e,#100126);
-  box-shadow: 0px 0px 20px 10px #100126;
+  font-size: 30px;
+  text-shadow: 0px 4px 20px rgb(255, 255, 255);
 }
 .first{
   display: flex;
@@ -24,39 +25,31 @@ body{
   align-items: center;
   color: white;
   font-size: 40px;
-  margin-top: 230px;
+  margin-top: 100px;
 }
 #temp{
-  font-size: 80px;
+  font-size: 30px;
 }
 .weather-container{
-  max-width: 600px;
-  height: 1000px;
-  width: 100%;
-  margin: auto;
-  margin-top: 20px;
+  height: auto;
+  width: auto;
+  margin: 20px auto;
   color: white;
   border-radius: 50px;
   box-shadow: 0px 0px 20px 10px #442c73;
-  background-image: url(weather.png);
+  background-image: url(w.png);
   object-fit: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-.weather-container h1{
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .search{
-  padding: 20px;
+  padding: 10px;
+  margin: 30px;
   display: flex;
-  gap: 30px;
-  margin-top: 50px;
+  gap: 20px;
 }
 .search input{
-  padding: 20px 30px;
+  padding: 10px 20px;
   border-radius: 10px;
   background: linear-gradient(to right,#100126, #442c73,#100126);
   color: white;
@@ -71,23 +64,21 @@ body{
   background: linear-gradient(to right,#100126, #442c73,#100126);
   color: white;
   box-shadow: 5px 5px 10px 0px #100126;
-  font-size: 25px;
+  font-size: 20px;
 }
 .grid{
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 30px;
-  padding: 10px;
-  margin: 20px;
-  margin-top: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  padding: 20px;
   color: white;
 }
 .card{
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
   background: linear-gradient(to right,#100126, #442c73,#100126);
   color: white;
   box-shadow: 5px 5px 10px 0px #100126;
@@ -100,11 +91,10 @@ body{
   text-shadow: 0px 1px 20px rgb(255, 255, 255);
 }
 .container{
-  max-width: 600px;
-  height: 1000px;
+  max-width: none;
+  height: auto;
   width: 100%;
-  margin: auto;
-  margin-top: 20px;
+  margin: 20px auto;
   color: white;
   background-image: url(weekly.png);
   object-fit: cover;
@@ -118,16 +108,16 @@ body{
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  font-size: 30px;
+  font-size: 20px;
 }
 .forecast-day{
-  width: 500px;
+  width: 300px;
   background: linear-gradient( #100126,#1f024a,#100126);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 20px;
+  padding: 10px;
+  font-size: 20px;
 }
 .day{
   display: flex;
@@ -137,5 +127,46 @@ body{
   font-size: 20px;
 }
 .temp{
-  font-size: 35px;
+  font-size: 25px;
+}
+
+.weekly-details{
+  max-width: none;
+  height: auto;
+  width: 100%;
+  margin: 20px auto;
+  margin-top: 20px;
+  color: white;
+  background-image: url(details.png);
+  object-fit: contain;
+  background-position: center;
+  background-position: no repeat;
+  border-radius: 50px;
+  box-shadow: 0px 0px 20px 10px #442c73;
+}
+#details{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px;
+}
+.detail{
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  background: linear-gradient( #100126,#1f024a,#100126);
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  font-size: 25px;
+}
+.detail h3{
+  font-size: 20px;
+}
+.detail p{
+  color: white;
+  font-size: 20px;
+  text-shadow: 0px 1px 20px rgb(255, 255, 255);
 }
